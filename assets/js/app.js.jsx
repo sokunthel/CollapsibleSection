@@ -1,15 +1,20 @@
 var CollapsibleSection = React.createClass({
+    getInitialState: function() {
+        return {collapsed: false};
+    },
+
     handleClick: function(event) {
-        $('.widget__body').toggleClass('widget__body--collapsed');
+        this.setState({collapsed: !this.state.collapsed})
     },
 
     render: function() {
+        var collapsed = this.state.collapsed?'widget__body--collapsed':'';
         return (
             <div className="widget-wrapper">
                 <div className="widget__title" onClick={this.handleClick}>
                     {this.props.title}
                 </div>
-                <div className="widget__body">
+                <div className={"widget__body " + collapsed}>
                     <p>{this.props.children}</p>
                 </div>
             </div>
